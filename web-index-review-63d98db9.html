@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>hth · 稳定索引入口说明页</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+      background: #f4f6fa;
+      color: #1e293b;
+      line-height: 1.6;
+    }
+
+    /* 深色头图 */
+    .hero {
+      background: linear-gradient(145deg, #0b1120 0%, #1a2332 100%);
+      color: #e2e8f0;
+      padding: 5rem 2rem 4rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::after {
+      content: '';
+      position: absolute;
+      top: -60%;
+      left: -10%;
+      width: 120%;
+      height: 140%;
+      background: radial-gradient(ellipse at 30% 20%, rgba(56, 189, 248, 0.08), transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero h1 {
+      font-size: 2.8rem;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      margin-bottom: 0.75rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero p {
+      max-width: 660px;
+      margin: 0 auto;
+      font-size: 1.15rem;
+      color: #94a3b8;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero .sub {
+      margin-top: 0.6rem;
+      font-size: 0.95rem;
+      color: #64748b;
+    }
+
+    /* 浅色正文区域 */
+    .content {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 3rem 2rem 4rem;
+    }
+
+    /* 信息卡片网格 */
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.8rem;
+      margin-bottom: 3rem;
+    }
+
+    .card {
+      background: #ffffff;
+      border-radius: 20px;
+      padding: 2rem 1.6rem;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03), 0 2px 6px rgba(0, 0, 0, 0.02);
+      transition: transform 0.2s ease, box-shadow 0.25s ease;
+      border: 1px solid #edf0f5;
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 28px rgba(0, 0, 0, 0.06), 0 4px 12px rgba(0, 0, 0, 0.04);
+    }
+
+    .card .icon {
+      font-size: 1.8rem;
+      margin-bottom: 0.8rem;
+      display: inline-block;
+      background: #eef2f7;
+      width: 48px;
+      height: 48px;
+      line-height: 48px;
+      text-align: center;
+      border-radius: 14px;
+    }
+
+    .card h3 {
+      font-size: 1.25rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+      color: #0f172a;
+    }
+
+    .card p {
+      font-size: 0.95rem;
+      color: #475569;
+      margin-bottom: 0.2rem;
+    }
+
+    .card .meta {
+      font-size: 0.85rem;
+      color: #64748b;
+      margin-top: 0.6rem;
+      border-top: 1px solid #e9edf2;
+      padding-top: 0.6rem;
+    }
+
+    /* 自然链接段落 block */
+    .link-block {
+      background: #ffffff;
+      border-radius: 20px;
+      padding: 2rem 2rem 2.2rem;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
+      border: 1px solid #edf0f5;
+      margin-bottom: 2.5rem;
+    }
+
+    .link-block h2 {
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: #0f172a;
+      margin-bottom: 0.6rem;
+    }
+
+    .link-block p {
+      font-size: 1rem;
+      color: #334155;
+      max-width: 740px;
+    }
+
+    .link-block .subnote {
+      font-size: 0.9rem;
+      color: #64748b;
+      margin-top: 0.7rem;
+    }
+
+    /* 强调色用于链接 */
+    a {
+      color: #2563eb;
+      text-decoration: none;
+      font-weight: 500;
+      border-bottom: 1px solid transparent;
+      transition: border-color 0.2s, color 0.2s;
+    }
+
+    a:hover {
+      color: #1d4ed8;
+      border-bottom-color: #a5c9ff;
+    }
+
+    /* 适合人群小卡片 */
+    .audience-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.8rem 1.2rem;
+      margin: 1.4rem 0 2rem;
+    }
+
+    .audience-tag {
+      background: #eef2f7;
+      padding: 0.35rem 1.1rem;
+      border-radius: 40px;
+      font-size: 0.9rem;
+      color: #1e293b;
+      border: 1px solid #dce2ec;
+    }
+
+    /* 简洁 FAQ 摘要 */
+    .faq-mini {
+      background: #f8fafc;
+      border-radius: 18px;
+      padding: 1.6rem 2rem;
+      border: 1px solid #e2e8f0;
+    }
+
+    .faq-mini h4 {
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin-bottom: 0.3rem;
+      color: #0f172a;
+    }
+
+    .faq-mini p {
+      font-size: 0.95rem;
+      color: #475569;
+      margin-bottom: 0.8rem;
+    }
+
+    .faq-mini .summary-item {
+      display: flex;
+      gap: 0.6rem;
+      margin-bottom: 0.5rem;
+      font-size: 0.95rem;
+    }
+
+    .faq-mini .summary-item strong {
+      color: #0f172a;
+      min-width: 80px;
+      font-weight: 600;
+    }
+
+    .faq-mini .summary-item span {
+      color: #334155;
+    }
+
+    hr {
+      border: none;
+      border-top: 1px solid #e2e8f0;
+      margin: 2rem 0;
+    }
+
+    footer {
+      text-align: center;
+      padding: 2rem 0 0.5rem;
+      color: #64748b;
+      font-size: 0.85rem;
+      border-top: 1px solid #e2e8f0;
+      margin-top: 1rem;
+    }
+
+    @media (max-width: 600px) {
+      .hero h1 { font-size: 2rem; }
+      .hero { padding: 3rem 1.2rem 2.8rem; }
+      .content { padding: 2rem 1rem 3rem; }
+      .card-grid { gap: 1.2rem; }
+      .card { padding: 1.6rem; }
+      .link-block { padding: 1.5rem; }
+      .faq-mini { padding: 1.2rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- 深色头图 -->
+  <section class="hero">
+    <h1>hth · 稳定索引入口</h1>
+    <p>页面说明与结构总览：面向需要快速理解站点用途的访问者，提供清晰的分类引导与信息卡片。</p>
+    <div class="sub">基于内容定位 · 精简卡片式布局</div>
+  </section>
+
+  <!-- 浅色正文区 -->
+  <div class="content">
+
+    <!-- 用途卡片 -->
+    <div class="card-grid">
+      <div class="card">
+        <div class="icon">📌</div>
+        <h3>索引定位</h3>
+        <p>将分散的资源整合为扁平化入口，减少跳转层级。适合需要直接获取目标页面的用户。</p>
+        <div class="meta">核心用途 · 聚合导航</div>
+      </div>
+      <div class="card">
+        <div class="icon">🧩</div>
+        <h3>模块分类</h3>
+        <p>按功能与内容划分成独立区块，每个卡片对应一类场景。降低认知负担，快速筛选。</p>
+        <div class="meta">结构清晰 · 一目了然</div>
+      </div>
+      <div class="card">
+        <div class="icon">🔗</div>
+        <h3>稳定引用</h3>
+        <p>作为长期可访问的参考页面，链接结构保持简洁。适用于书签、文档索引或团队内部使用。</p>
+        <div class="meta">持续维护 · 低变更</div>
+      </div>
+    </div>
+
+    <!-- 适合人群（标签式） -->
+    <div style="margin-bottom: 0.5rem; font-weight: 500; color: #0f172a;">适合人群</div>
+    <div class="audience-row">
+      <span class="audience-tag">内容整理者</span>
+      <span class="audience-tag">效率工具使用者</span>
+      <span class="audience-tag">轻量索引需求</span>
+      <span class="audience-tag">文档维护者</span>
+      <span class="audience-tag">站内导航</span>
+    </div>
+
+    <!-- 自然链接段落 -->
+    <div class="link-block">
+      <h2>页面说明与主索引</h2>
+      <p>
+        当前页面作为 <a href="https://web-index-hth.com">hth</a> 的说明性介绍页，围绕稳定入口与模块分类展开。
+        顶部深色区域概括站点角色，中部卡片展示具体用途，下方摘要提供快速指引。
+        所有链接保持直链，不经过中间跳转，适合直接引用或加入收藏夹。
+      </p>
+      <p class="subnote">
+        如需直接跳转至主站，可使用上方自然嵌入的链接，或通过浏览器书签访问。
+        本页不收集任何用户信息，仅作结构演示与说明。
+      </p>
+    </div>
+
+    <!-- 场景 + 提示摘要 (FAQ 风格) -->
+    <div class="faq-mini">
+      <h4>常见场景提示</h4>
+      <div class="summary-item">
+        <strong>索引用途</strong>
+        <span>快速定位到目标资源，减少中间页面干扰。</span>
+      </div>
+      <div class="summary-item">
+        <strong>内容结构</strong>
+        <span>卡片分组 + 标签式受众，适合不同角色快速理解。</span>
+      </div>
+      <div class="summary-item">
+        <strong>维护方式</strong>
+        <span>链接保持长期有效，如遇变更会在本页提前标注。</span>
+      </div>
+      <div class="summary-item">
+        <strong>推荐做法</strong>
+        <span>将 <a href="https://web-index-hth.com">hth</a> 加入书签栏，作为常驻索引页使用。</span>
+      </div>
+    </div>
+
+    <hr>
+
+    <footer>
+      说明页 · 结构版本 &mdash; 信息卡片式布局 · 基于稳定入口设计
+    </footer>
+  </div>
+
+</body>
+</html>
